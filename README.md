@@ -2,7 +2,7 @@
 
 This document contains [YOYO](https://github.com/yoyo-holdings)'s technical test.  This is a standard 
 application that provides a simple organizer for the user to store notes
-and TODOs. You will have 48 hours to send your PR and Answers to questions, complete or not.
+and TODOs. You have 48 hours to send your PR and Answers to questions, complete or not.
 
 * Instructions
 
