@@ -1,10 +1,10 @@
+import "dotenv/config";
 import express, { Express, Request, Response } from "express";
-import * as dotenv from "dotenv";
+import { appConfig } from "./configs";
 
-dotenv.config();
+const { port } = appConfig;
 
 const app: Express = express();
-const port = process.env.PORT;
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Express + TypeScript Server");
