@@ -1,7 +1,7 @@
 import { ToDoNote } from "../models";
 import { sequelize } from "../sequelize";
 import { ToDoReq } from "../shared/dtos";
-import { createTodo, deleteTodo, updateTodo } from "./todo.service";
+import { createTodo, deleteTodo, updateTodo } from "./todos.service";
 
 jest.mock("sequelize");
 jest.mock("../sequelize", () => ({
