@@ -1,0 +1,64 @@
+version: "3.9"
+services:
+  nginx:
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    ports:
+      - '1337:80'
+    depends_on:
+      - server
+      - client
+  client:
+    build:
+      dockerfile: Dockerfile
+      context: ./client
+    volumes:
+      - ./client:/app/
+      - client_volume:/app/node_modules
+  postgres:
+    image: postgres:12-alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - type: volume
+        source: postgres_volume
+        target: /var/lib/postgresql/data
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+  db_migration:
+    build:
+      dockerfile: Dockerfile
+      context: ./server
+    restart: on-failure
+    command: sh -c "npm run db:migrate"
+    depends_on:
+      - postgres
+    volumes:
+      - ./server:/app/
+      - server_volume:/app/node_modules
+    env_file:
+      - ./server/.env
+  server:
+    build:
+      dockerfile: Dockerfile
+      context: ./server
+    restart: on-failure
+    depends_on:
+      - db_migration
+    volumes:
+      - ./server:/app/
+      - server_volume:/app/node_modules
+    env_file:
+      - ./server/.env
+    ports:
+      - 8000:8000
+volumes:
+  client_volume:
+  server_volume:
+  postgres_volume:
