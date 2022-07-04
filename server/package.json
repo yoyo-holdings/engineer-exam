@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "sequelize": "ts-node node_modules/.bin/sequelize",
+    "db:migrate": "npm run sequelize db:migrate",
+    "db:migrate:undo": "npm run sequelize db:migrate:undo",
+    "db:migrate:undo:all": "npm run sequelize db:migrate:undo:all",
     "start": "nodemon",
     "prebuild": "rimraf dist",
     "build": "tsc -p tsconfig.build.json",
