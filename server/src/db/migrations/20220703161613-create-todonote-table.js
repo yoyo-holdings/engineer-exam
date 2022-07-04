@@ -1,7 +1,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable(
-      "todonote",
+      "todonotes",
       {
         id: {
           allowNull: false,
@@ -37,10 +37,10 @@ module.exports = {
       }
     );
 
-    await queryInterface.addIndex("todonote", ["type"]);
+    await queryInterface.addIndex("todonotes", ["type"]);
   },
   down: async (queryInterface) => {
-    await queryInterface.dropTable("todonote");
-    await queryInterface.dropEnum("enum_todonote_type");
+    await queryInterface.dropTable("todonotes");
+    await queryInterface.dropEnum("enum_todonotes_type");
   },
 };

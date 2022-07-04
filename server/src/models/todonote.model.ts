@@ -31,6 +31,7 @@ interface ToDoNoteCreationAttributes
   > {}
 
 @Table({
+  tableName: "todonotes",
   paranoid: true,
   timestamps: true,
 })
